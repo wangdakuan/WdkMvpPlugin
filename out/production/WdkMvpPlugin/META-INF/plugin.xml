@@ -1,0 +1,38 @@
+<idea-plugin>
+    <id>com.wdk.mvp</id>
+    <name>WdkFMvpPlugin</name>
+    <version>1.0.0</version>
+    <vendor email="352012599@qq.com">湖南靠谱科技股份有限公司</vendor>
+
+    <description><![CDATA[
+      MVP plug-ins<br>
+      <em>most HTML tags may be used</em>
+    ]]></description>
+
+    <change-notes><![CDATA[
+    WdkMvpPlugin发布  <br>
+      <em>most HTML tags may be used</em>
+    ]]>
+    </change-notes>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="131"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products  -->
+    <depends>com.intellij.modules.lang</depends>
+
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <action id="WMVP.WMVPAction" class="com.wdk.MvpDataCreateAction" text="WdkMvpPlugin">
+            <add-to-group group-id="NewGroup" anchor="last"/>
+        </action>
+    </actions>
+
+</idea-plugin>

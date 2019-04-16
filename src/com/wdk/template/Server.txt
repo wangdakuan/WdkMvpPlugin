@@ -1,0 +1,37 @@
+/**
+ * Copyright (C), 2019, 湖南靠谱科技股份有限公司
+ * FileName: &Module&Factory
+ * Author: wangdakuan
+ * Date: 2019/3/28 5:17 PM
+ * Description: 功能的服务层
+ * History:
+ * <author> <time> <version> <desc>
+ * 作者姓名 修改时间 版本号 基础数据层描述
+ */
+package &package&;
+
+import &FactoryPackageName&.&Module&Factory;
+import &InteractorPackageName&.&Module&Interactor;
+import com.dodata.net.utils.JsonUtils;
+
+/**
+ * Copyright (C), 2015-2019, 湖南靠谱科技股份有限公司
+ * FileName:  &Module&Server
+ * Author:
+ * Date:
+ * Description: 功能的服务层
+ * History:
+ * <author> <time> <version> <desc>
+ * 作者姓名 修改时间 版本号 描述
+ */
+public class &Module&Server {
+    &Module&Factory m&Module&Factory;
+
+    public &Module&Server() {
+        this(new &Module&Factory());
+    }
+
+    public &Module&Server(&Module&Factory factory) {
+        this.m&Module&Factory = factory;
+    }
+}

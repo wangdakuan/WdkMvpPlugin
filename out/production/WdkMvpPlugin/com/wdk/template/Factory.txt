@@ -1,0 +1,83 @@
+/**
+ * Copyright (C), 2019, 湖南靠谱科技股份有限公司
+ * FileName: &Module&Factory
+ * Author: wangdakuan
+ * Date: 2019/3/28 3:54 PM
+ * Description: 工厂实现类 区分内存与网络获取
+ * History:
+ * <author> <time> <version> <desc>
+ * 作者姓名 修改时间 版本号 基础数据层描述
+ */
+package &package&;
+
+import com.common.utils.NetworkUtils;
+import &InteractorPackageName&.&Module&Interactor;
+import &DiaskSourcePackageName&.&Module&DiaskSource;
+import &SourcePackageName&.&Module&Source;
+import com.dodata.cache.ObjectCache;
+import com.dodata.cache.ObjectCacheImpl;
+
+ /**
+  * Copyright (C), 2015-2019, 湖南靠谱科技股份有限公司
+  * FileName: &Module&Factory
+  * Author:
+  * Date:
+  * Description: 工厂实现类 区分内存与网络获取
+  * History:
+  * <author> <time> <version> <desc>
+  * 作者姓名 修改时间 版本号 描述
+  */
+public class &Module&Factory {
+    private ObjectCache objectCache;
+
+    public &Module&Factory() {
+        this(new ObjectCacheImpl());
+    }
+
+    public &Module&Factory(ObjectCacheImpl objectCache) {
+        this.objectCache = objectCache;
+    }
+
+    /**
+     * 数据不经常更新时每次都会优先取缓存
+     *
+     * @param name 缓存时的KEY
+     * @return
+     */
+    public &Module&Interactor create&Module&Data(String name) {
+        return create&Module&Data(name, false);
+    }
+
+    /**
+     * 数据经常更新时每次都会优先取网络
+     *
+     * @param name   缓存的key
+     * @param isWifi 是否判断网络  如果true 判断网络，当前手机没网情况下进行读取本地缓存数据
+     * @return
+     */
+    public &Module&Interactor create&Module&Data(String name, boolean isWifi) {
+        &Module&Interactor dataInteractor = null;
+        if (isWifi) {
+            if (!NetworkUtils.isAvailableByPing()) {
+                if (this.objectCache.isCached(name)) {
+                    dataInteractor = new &Module&DiaskSource(this.objectCache);
+                }
+            }
+        } else {
+            if (this.objectCache.isCached(name)) {
+                dataInteractor = new &Module&DiaskSource(this.objectCache);
+            }
+        }
+        if(null == dataInteractor){
+            dataInteractor = create&Module&Store();
+        }
+        return dataInteractor;
+    }
+
+    /**
+     * 开启网络请求
+     */
+    private &Module&Interactor create&Module&Store() {
+        return new &Module&Source(this.objectCache);
+    }
+}
